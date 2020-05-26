@@ -35,6 +35,6 @@ export const handler = async() => {
 
 (() => {
   console.log("I do things before you run the function", config);
-  console.log(process.env.MYVAR);
+  console.log(process.env);
   dynamo = new KillerService(config);
 })()
