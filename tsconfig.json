@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "sourceMap": false,
+    "module": "commonjs",
+    "target": "es5",
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "jsx": "react",
+    "allowJs": true,
+    "types" : [
+      "node",
+      "aws-sdk"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "lib": [
+      "es5",
+      "es2015.promise"
+    ]
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
