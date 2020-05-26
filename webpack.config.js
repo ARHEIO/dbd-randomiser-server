@@ -4,8 +4,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
-    get: './src/GET/get.ts',
-    post: './src/POST/post.ts',
+    getKiller: './src/controllers/getKiller.ts',
+    getSurvivor: './src/controllers/getSurvivor.ts',
   },
   externals: [
     nodeExternals({
