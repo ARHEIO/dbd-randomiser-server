@@ -16,9 +16,6 @@ jobs:
     - name: Install Serverless Framework
       run: npm install -g serverless
 
-    - name: Serverless AWS authentication
-      run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
 #     - name: Create env file
 #       run: | # cp sample.env.yml env.yml
 #         cat > env.yml << EOF
@@ -29,6 +26,9 @@ jobs:
     
     - name: Build assets
       run: npm run build
+
+    - name: Serverless AWS authentication
+      run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     - name: Deploy Lambda functions
       run: sls deploy -s dev
