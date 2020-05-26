@@ -14,10 +14,7 @@ export class KillerService extends DynamoService {
   constructor(config: any) {
     super(config);
 
-    this.tableNames = {
-        killers: config.killer.killers,
-        perks: config.killer.perks,
-      }
+    this.tableNames = config.killer.tableNames;
   }
 
   public async getRandomKiller(): Promise<dbdRandomiserKiller> {

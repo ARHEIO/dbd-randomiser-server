@@ -15,11 +15,7 @@ export class SurvivorService extends DynamoService {
   constructor(config: any) {
     super(config);
 
-    this.tableNames = {
-      survivors: config.tableNames.survivor.survivors,
-      perks: config.tableNames.survivor.perks,
-      items: config.tableNames.survivor.items,
-    }
+    this.tableNames = config.survivor.tableNames;
   }
 
   public async getRandomSurvivor(): Promise<dbdRandomiserSurvivor> {
