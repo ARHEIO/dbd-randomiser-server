@@ -9,6 +9,7 @@
 import { KillerService } from "../services/KillerService";
 import { IGeneratedKiller } from "../models/responses.model";
 import * as utils from '../helpers/utils';
+import config from '../config';
 
 let dynamo: KillerService;
 
@@ -33,9 +34,6 @@ export const handler = async() => {
 }
 
 (() => {
-  console.log("I do things before you run the function")
-  const settings = process.env.NODE_ENV != 'prodiction'
-  ? { endpoints: { dynamo: "https://dynamodb.ap-southeast-2.amazonaws.com" } }
-  : { endpoints: { dynamo: "http://localhost:8000" } };
-  dynamo = new KillerService(settings);
+  console.log("I do things before you run the function", config);
+  dynamo = new KillerService(config);
 })()

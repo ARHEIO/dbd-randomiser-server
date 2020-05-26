@@ -12,14 +12,14 @@ import { dbdRandomiserSurvivor, dbdRandomiserItem, dbdRandomiserPerk } from '../
 
  
 export class SurvivorService extends DynamoService {
-  tableNames = {
-    survivors: 'dbd-randomiser-survivors',
-    perks: 'dbd-randomiser-perks-survivor',
-    items: 'dbd-randomiser-items',
-  }
-
   constructor(config: any) {
     super(config);
+
+    this.tableNames = {
+      survivors: config.tableNames.survivor.survivors,
+      perks: config.tableNames.survivor.perks,
+      items: config.tableNames.survivor.items,
+    }
   }
 
   public async getRandomSurvivor(): Promise<dbdRandomiserSurvivor> {

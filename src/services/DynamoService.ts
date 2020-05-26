@@ -10,6 +10,7 @@
 
 export class DynamoService {
   dynamo: DynamoDB.DocumentClient;
+  tableNames: any;
 
   constructor(config: any) {
     this.dynamo = new DynamoDB.DocumentClient({

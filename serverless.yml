@@ -50,6 +50,7 @@ functions:
 
 plugins:
   - serverless-domain-manager
+  - serverless-dotenv-plugin
 
 custom:
   stage: ${opt:stage, self:provider.stage}
@@ -64,3 +65,6 @@ custom:
     createRoute53Record: true
     basePath: 'dbd-randomiser'
     endpointType: 'edge'
+
+  dotenv:
+    path: ./.env
