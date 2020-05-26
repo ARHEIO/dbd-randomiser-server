@@ -17,11 +17,11 @@ jobs:
     - name: Install Serverless Framework
       run: npm install -g serverless
 
-#     - name: Create env file
-#       run: | # cp sample.env.yml env.yml
-#         cat > env.yml << EOF
-#         ${{ secrets.ENV }}
-#         EOF
+    - name: Create env file
+      run:
+        cat > .env << EOF
+        ${{ secrets.ENV }}
+        EOF
     - name: Install NPM dependencies
       run: npm install
     
