@@ -44,6 +44,6 @@ export const handler = async() => {
 }
 
 (() => {
-  console.log("I do things before you run the function")
+  console.log("I do things before you run the function", config)
   dynamo = new SurvivorService(config);
 })()

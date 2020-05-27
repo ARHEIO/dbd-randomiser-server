@@ -17,14 +17,22 @@ jobs:
     - name: Install Serverless Framework
       run: npm install -g serverless
 
-#     - name: Create env file
-#       run: | # cp sample.env.yml env.yml
-#         cat > env.yml << EOF
-#         ${{ secrets.ENV }}
-#         EOF
     - name: Install NPM dependencies
       run: npm install
     
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        repository: arheio/env-config
+        token: ${{ secrets.checkoutToken }}
+        path: ./env-config
+
+    - name: Overwrite environment files
+      uses: ./env-config
+      with:
+        deploymentStage: 'prod'
+        repoName: 'dbd-randomiser-server'
+
     - name: Build assets
       run: npm run build
 
