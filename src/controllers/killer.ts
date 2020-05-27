@@ -15,7 +15,14 @@ let dynamo: KillerService;
 
 export const handler = async() => {
   return new Promise(async resolve => {
-    const response = { statusCode: 200, body: '' };
+    const response = {
+      statusCode: 200,
+      headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+      },
+      body: ''
+    };
 
     const randomKiller = await dynamo.getRandomKiller();
     const randomAddons = utils.shuffleAndSliceArray(randomKiller.upgradables, 2)

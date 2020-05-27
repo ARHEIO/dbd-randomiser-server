@@ -35,6 +35,7 @@ functions:
       - http:
           path: killer
           method: any
+          cors: true
   survivor:
     handler: dist/survivor.handler
     environment:
@@ -46,6 +47,7 @@ functions:
       - http:
           path: survivor
           method: any
+          cors: true
 
 
 plugins:
