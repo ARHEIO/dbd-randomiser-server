@@ -1,0 +1,43 @@
+name: Production release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@master
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Install Serverless Framework
+      run: npm install -g serverless
+
+    - name: Install NPM dependencies
+      run: npm install
+    
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        repository: arheio/env-config
+        token: ${{ secrets.checkoutToken }}
+        path: ./env-config
+
+    - name: Overwrite environment files
+      uses: ./env-config
+      with:
+        deploymentStage: 'prod'
+        repoName: 'dbd-randomiser-server'
+
+    - name: Build assets
+      run: npm run build
+
+    - name: Serverless AWS authentication
+      run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Deploy Lambda functions
+      run: sls deploy -s prod

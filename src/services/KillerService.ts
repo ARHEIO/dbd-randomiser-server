@@ -11,13 +11,10 @@ import * as utils from '../helpers/utils';
 import { dbdRandomiserKiller, dbdRandomiserPerk } from '../models/tables.model';
 
 export class KillerService extends DynamoService {
-  tableNames = {
-    killers: 'dbd-randomiser-killers',
-    perks: 'dbd-randomiser-perks-killer',
-  }
-
   constructor(config: any) {
     super(config);
+
+    this.tableNames = config.killer.tableNames;
   }
 
   public async getRandomKiller(): Promise<dbdRandomiserKiller> {

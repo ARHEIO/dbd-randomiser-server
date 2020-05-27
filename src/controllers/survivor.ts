@@ -9,6 +9,7 @@
 import { SurvivorService } from "../services/SurvivorService";
 import { IGeneratedSurvivor } from "../models/responses.model";
 import * as utils from '../helpers/utils';
+import config from '../config';
 
 let dynamo: SurvivorService;
 
@@ -43,9 +44,6 @@ export const handler = async() => {
 }
 
 (() => {
-  console.log("I do things before you run the function")
-  const settings = process.env.NODE_ENV != 'prodiction'
-  ? { endpoints: { dynamo: "https://dynamodb.ap-southeast-2.amazonaws.com" } }
-  : { endpoints: { dynamo: "http://localhost:8000" } };
-  dynamo = new SurvivorService(settings);
+  console.log("I do things before you run the function", config)
+  dynamo = new SurvivorService(config);
 })()
