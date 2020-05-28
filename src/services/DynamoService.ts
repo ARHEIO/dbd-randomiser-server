@@ -6,13 +6,14 @@
  * found in the LICENSE file
  */
 
- import { DynamoDB, AWSError } from 'aws-sdk';
+import { DynamoDB, AWSError } from 'aws-sdk';
+import { IConfig } from '../config';
 
 export class DynamoService {
   dynamo: DynamoDB.DocumentClient;
   tableNames: any;
 
-  constructor(config: any) {
+  constructor(config: IConfig) {
     this.dynamo = new DynamoDB.DocumentClient({
       region: 'ap-southeast-2',
       endpoint: config.endpoints.dynamo
