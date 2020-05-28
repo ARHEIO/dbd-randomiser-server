@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+  # dynamodb:
+  #   image: amazon/dynamodb-local:latest
+  #   ports:
+  #     - "8000:8000"
+  #   command: ["-jar", "DynamoDBLocal.jar", "-sharedDb", "-inMemory"]
+  # build:
+  #   command: >
+  #     bash -c "npm install && npm build"
+  #   image: lambci/lambda:nodejs12.x
+  #   volumes:
+  #     - '$PWD:/var/task:ro,delegated'
+  #   working_dir: /tmp
+
+  # Develop function
+  dev:
+    # depends_on:
+    #   - build
+    command: killer.handler
+    env_file: .env
+    environment: 
+      DOCKER_LAMBDA_STAY_OPEN: 1
+    image: lambci/lambda:nodejs12.x
+    volumes:
+      - '$PWD:/var/task:ro,delegated'
+
+
+docker run --rm \
+  -e DOCKER_LAMBDA_STAY_OPEN=1 \
+  -p 9001:9001 \
+  -v $PWD:/var/task:ro,delegated \
+  -v $PWD./opt:/opt:ro,delegated \
+  lambci/lambda:nodejs12.x \
+  dist/killer.handler
