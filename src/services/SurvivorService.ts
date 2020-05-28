@@ -1,6 +1,7 @@
 import { DynamoService } from './DynamoService';
 import * as utils from '../helpers/utils';
 import { dbdRandomiserSurvivor, dbdRandomiserItem, dbdRandomiserPerk } from '../models/tables.model';
+import { IConfig } from '../config';
 
 /**
  * @license
@@ -12,7 +13,7 @@ import { dbdRandomiserSurvivor, dbdRandomiserItem, dbdRandomiserPerk } from '../
 
  
 export class SurvivorService extends DynamoService {
-  constructor(config: any) {
+  constructor(config: IConfig) {
     super(config);
 
     this.tableNames = config.survivor.tableNames;

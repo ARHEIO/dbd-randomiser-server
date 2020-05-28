@@ -18,3 +18,22 @@ export default {
     dynamo: process.env.DYNAMO_ENDPOINT
   }
 }
+
+export interface IConfig {
+  survivor: {
+    tableNames: {
+      survivors: string;
+      perks: string;
+      items: string;
+    }
+  },
+  killer: {
+    tableNames: {
+      killers: string;
+      perks: string;
+    }
+  },
+  endpoints: {
+    dynamo: string;
+  }
+}

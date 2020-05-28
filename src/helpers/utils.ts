@@ -1,10 +1,10 @@
-export const shuffleAndSliceArray = (arrayOfThings: any[], numberToGet: number) => {
+export function shuffleAndSliceArray<T> (arrayOfThings: T[], numberToGet: number): T[] {
   return arrayOfThings && arrayOfThings.length
     ? arrayOfThings
-        .map(x => ({ x, r: Math.random() }))
-        .sort((a, b) => a.r - b.r)
-        .map(a => a.x)
-        .slice(0, numberToGet)
+      .map(x => ({ x, r: Math.random() }))
+      .sort((a, b) => a.r - b.r)
+      .map(a => a.x)
+      .slice(0, numberToGet)
     : [];
 }
 

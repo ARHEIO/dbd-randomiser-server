@@ -13,17 +13,17 @@ import config from '../config';
 
 let dynamo: SurvivorService;
 
-export const randomNumberGenerator = (max: number) => {
+export const randomNumberGenerator = (max: number): number => {
   return Math.floor(Math.random() * max)
 }
 
-export const handler = async() => {
+export const handler = async(): Promise<any> => {
   return new Promise(async resolve => {
     const response = {
       statusCode: 200,
       headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
       },
       body: ''
     };

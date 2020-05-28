@@ -9,9 +9,10 @@
 import { DynamoService } from './DynamoService';
 import * as utils from '../helpers/utils';
 import { dbdRandomiserKiller, dbdRandomiserPerk } from '../models/tables.model';
+import { IConfig } from '../config';
 
 export class KillerService extends DynamoService {
-  constructor(config: any) {
+  constructor(config: IConfig) {
     super(config);
 
     this.tableNames = config.killer.tableNames;
