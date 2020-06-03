@@ -7,50 +7,40 @@
  */
 
 import { SurvivorService } from "../services/SurvivorService";
-import { IGeneratedSurvivor } from "../models/responses.model";
-import * as utils from '../helpers/utils';
 import config from '../config';
+import { APIGatewayProxyEvent } from "aws-lambda";
 
 let dynamo: SurvivorService;
 
-export const randomNumberGenerator = (max: number) => {
-  return Math.floor(Math.random() * max)
-}
+const response = {
+  statusCode: 200,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': true,
+  },
+  body: ''
+};
 
-export const handler = async() => {
-  return new Promise(async resolve => {
-    const response = {
-      statusCode: 200,
-      headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
-      },
-      body: ''
-    };
-
-    const randomSurvivor = await dynamo.getRandomSurvivor();
-    const randomItem = await dynamo.getRandomItem();
-    const randomAddons = utils.shuffleAndSliceArray(randomItem.upgradables, 2)
-    const randomPerks = await dynamo.getRandomPerks();
-
-    const Survivor: IGeneratedSurvivor = {
-      name: randomSurvivor.name,
-      icon: randomSurvivor.icon,
-      item: {
-        name: randomItem.name,
-        icon: randomItem.icon,
-        rank: randomItem.rank,
-        addons: randomAddons
-      },
-      perks: randomPerks
+export const handler = async(request: APIGatewayProxyEvent): Promise<any> => {
+  return new Promise(async (resolve, reject) => {
+    let survivor;
+ 
+    try {
+      const survivorId = request.pathParameters && request.pathParameters.id
+      if (survivorId) {
+        survivor = await dynamo.getSurvivor(parseInt(survivorId));
+      } else {
+        survivor = await dynamo.getAllSurvivors();
+      }
+      response.body = JSON.stringify(survivor);
+      resolve(response);
+    } catch (error) {
+      response.statusCode = 500;
+      reject(response);
     }
-    response.body = JSON.stringify(Survivor);
-
-    resolve(response);
   })
 }
 
 (() => {
-  console.log("I do things before you run the function", config)
   dynamo = new SurvivorService(config);
 })()

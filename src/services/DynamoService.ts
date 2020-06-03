@@ -6,16 +6,18 @@
  * found in the LICENSE file
  */
 
- import { DynamoDB, AWSError } from 'aws-sdk';
+import { DynamoDB, AWSError } from 'aws-sdk';
+import { IConfig } from '../config';
 
 export class DynamoService {
   dynamo: DynamoDB.DocumentClient;
   tableNames: any;
 
-  constructor(config: any) {
+  constructor(config: IConfig) {
     this.dynamo = new DynamoDB.DocumentClient({
       region: 'ap-southeast-2',
-      endpoint: config.endpoints.dynamo
+      endpoint: config.endpoints.dynamo,
+      maxRetries: 3
     });
   }
 
@@ -32,6 +34,22 @@ export class DynamoService {
         } else {
           console.log(`message='retreived item' item='${results.Item}'`)
           resolve(results.Item as any);
+        }
+      })
+    })
+  }
+
+  protected getAllItems(table: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.dynamo.scan({TableName: table,}, (err: AWSError, results: DynamoDB.DocumentClient.ScanOutput) => {
+        if (err) {
+          console.log(`message='rejected with error' err='${err}'`)
+          reject(err);
+        } else {
+          console.log(`message='retreived item' item='${results}'`)
+          delete results.Count;
+          delete results.ScannedCount;
+          resolve(results);
         }
       })
     })
