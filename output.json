@@ -1,0 +1,1 @@
+{"errorType":"Runtime.ImportModuleError","errorMessage":"Error: Cannot find module 'killer'\nRequire stack:\n- /var/runtime/UserFunction.js\n- /var/runtime/index.js"}

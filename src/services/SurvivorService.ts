@@ -1,8 +1,3 @@
-import { DynamoService } from './DynamoService';
-import * as utils from '../helpers/utils';
-import { dbdRandomiserSurvivor, dbdRandomiserItem, dbdRandomiserPerk } from '../models/tables.model';
-import { IConfig } from '../config';
-
 /**
  * @license
  * Copyright Adam Eggleston. All Rights Reserved.
@@ -11,6 +6,9 @@ import { IConfig } from '../config';
  * found in the LICENSE file
  */
 
+import { DynamoService } from './DynamoService';
+import { dbdRandomiserSurvivor, dbdRandomiserItem, dbdRandomiserPerk } from '../models/tables.model';
+import { IConfig } from '../config';
  
 export class SurvivorService extends DynamoService {
   constructor(config: IConfig) {
@@ -19,30 +17,31 @@ export class SurvivorService extends DynamoService {
     this.tableNames = config.survivor.tableNames;
   }
 
-  public async getRandomSurvivor(): Promise<dbdRandomiserSurvivor> {
-    const survIndex = utils.getRandomIndex((await this.getSurvivorSize()), 1)[0];
-    return this.getItem(survIndex, this.tableNames.survivors);
+  public async getSurvivor(index: number): Promise<dbdRandomiserSurvivor> {
+    return this.getItem(index, this.tableNames.survivors);
   }
 
-  public async getRandomItem(): Promise<dbdRandomiserItem> {
-    const itemIndex = utils.getRandomIndex((await this.getItemSize()), 1)[0];
-    return this.getItem(itemIndex, this.tableNames.items);
+  public async getAllSurvivors(): Promise<dbdRandomiserSurvivor[]> {
+    return this.getAllItems(this.tableNames.survivors);
   }
 
-  public async getRandomPerks(): Promise<dbdRandomiserPerk[]> {
-    const perkIds = utils.getRandomIndex((await this.getPerkSize()), 4);
-    return Promise.all(perkIds.map(id => this.getItem(id, this.tableNames.perks)))
+  public async getSurvivorPerk(index: number): Promise<dbdRandomiserPerk> {
+    return this.getItem(index, this.tableNames.perks);
   }
 
-  private async getSurvivorSize(): Promise<number> {
+  public async getSurvivorItem(index: number): Promise<dbdRandomiserItem> {
+    return this.getItem(index, this.tableNames.items);
+  }
+
+  public async getSurvivorSize(): Promise<number> {
     return this.getTableSize(this.tableNames.survivors)
   }
   
-  private getPerkSize(): Promise<number> {
+  public getPerkSize(): Promise<number> {
     return this.getTableSize(this.tableNames.perks)
   }
   
-  private getItemSize(): Promise<number> {
+  public getItemSize(): Promise<number> {
     return this.getTableSize(this.tableNames.items)
   }
 }
