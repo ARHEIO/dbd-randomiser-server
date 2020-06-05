@@ -60,6 +60,30 @@ functions:
           path: loadout
           method: any
           cors: true
+  item:
+    handler: dist/item.handler
+    environment:
+      NODE_ENV: production
+    package:
+      include:
+        - dist/item.js
+    events:
+      - http:
+          path: item
+          method: any
+          cors: true
+  perk:
+    handler: dist/perk.handler
+    environment:
+      NODE_ENV: production
+    package:
+      include:
+        - dist/perk.js
+    events:
+      - http:
+          path: perk
+          method: any
+          cors: true
 
 
 plugins:

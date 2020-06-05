@@ -9,8 +9,11 @@
 import { SurvivorService } from "../services/SurvivorService";
 import config from '../config';
 import { APIGatewayProxyEvent } from "aws-lambda";
+import { Dynamo } from "../db/Dynamo.db";
+import { dbdRandomiserSurvivor } from "../models/tables.model";
+import { isArray } from "util";
 
-let dynamo: SurvivorService;
+let survService: SurvivorService;
 
 const response = {
   statusCode: 200,
@@ -22,25 +25,25 @@ const response = {
 };
 
 export const handler = async(request: APIGatewayProxyEvent): Promise<any> => {
-  return new Promise(async (resolve, reject) => {
-    let survivor;
- 
+  return new Promise(async (resolve) => {
+
     try {
       const survivorId = request.pathParameters && request.pathParameters.id
-      if (survivorId) {
-        survivor = await dynamo.getSurvivor(parseInt(survivorId));
-      } else {
-        survivor = await dynamo.getAllSurvivors();
-      }
+      const survivor: dbdRandomiserSurvivor | dbdRandomiserSurvivor[] = survivorId
+        ? await survService.getCharacter(parseInt(survivorId))
+        : await survService.getAllCharacters();
       response.body = JSON.stringify(survivor);
-      resolve(response);
+      console.log("Successfully retrieved", isArray(survivor) ? 'all survivors' : survivor.name);
     } catch (error) {
+      console.error(error)
       response.statusCode = 500;
-      reject(response);
+      response.body = error;
     }
+
+    resolve(response);
   })
 }
 
 (() => {
-  dynamo = new SurvivorService(config);
+  survService = new SurvivorService(config, new Dynamo(config));
 })()

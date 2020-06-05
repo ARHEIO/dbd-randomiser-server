@@ -7,8 +7,11 @@
  */
 
 import config from '../config';
+
 import { APIGatewayProxyResult, APIGatewayProxyEvent } from "aws-lambda";
 import { LoadoutService } from "../services/LoadoutService";
+import { IGeneratedSurvivor, IGeneratedKiller } from '../models/responses.model';
+import { Dynamo } from '../db/Dynamo.db';
 
 let loadout: LoadoutService;
 
@@ -22,35 +25,32 @@ const response = {
 };
 
 export const handler = async(request: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async resolve => {
     try {
       switch(request.queryStringParameters.q) {
         case 'survivor':
-          const survivor = await loadout.generateSurvivorLoadout();
+          const survivor: IGeneratedSurvivor = await loadout.generateSurvivorLoadout();
           response.body = JSON.stringify(survivor);
-          console.log('survivor', response)
-          resolve(response);
           break;
+
         case 'killer':
-          const killer = await loadout.generateKillerLoadout();
+          const killer: IGeneratedKiller = await loadout.generateKillerLoadout();
           response.body = JSON.stringify(killer);
-          console.log('killer', response)
-          resolve(response);
           break;
+
         default:
           response.statusCode = 400;
           response.body = `{msg: "bad query param"}`
-          console.log('default', response)
-          resolve(response);
       }
+      console.log(`Successfully retrieved loadout for ${request.queryStringParameters.q}`);
     } catch (error) {
       response.statusCode = 500;
       response.body = `{msg: ${error}}`
-      reject(response);
     }
+    resolve(response);
   })
 }
 
 (() => {
-  loadout = new LoadoutService(config);
+  loadout = new LoadoutService(config, new Dynamo(config));
 })()

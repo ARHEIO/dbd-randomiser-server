@@ -7,11 +7,6 @@ services:
     command: ["-jar", "DynamoDBLocal.jar", "-sharedDb", "-dbPath", "/home/dynamodblocal/data"]
     volumes:
       - ./volumes/dynamodb:/home/dynamodblocal/data
-    deploy:
-      resources:
-        limits:
-          cpus: '0.1'
-          memory: 200M
 
   dbd-server:
     image: lambci/lambda:nodejs12.x
@@ -23,8 +18,9 @@ services:
       - "9001:9001"
     volumes:
       - '$PWD:/var/task:ro,delegated'
-    deploy:
-      resources:
-        limits:
-          cpus: '0.1'
-          memory: 200M
+
+  dbd-gateway:
+    build: ./api-gateway
+    ports:
+      - "9002:9002"
+

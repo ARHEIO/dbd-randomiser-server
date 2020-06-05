@@ -6,348 +6,269 @@
 	},
 	"item": [
 		{
-			"name": "Local",
-			"item": [
-				{
-					"name": "Get Killer Loadout",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"path\": \"/loadout\",\n    \"httpMethod\": \"GET\",\n    \"queryStringParameters\": {\n    \t\"q\": \"killer\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:9001/2015-03-31/functions/-/invocations",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9001",
-							"path": [
-								"2015-03-31",
-								"functions",
-								"-",
-								"invocations"
-							]
+			"name": "Get Killer Loadout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/loadout?q=killer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"loadout"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "killer"
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Killers",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"path\": \"/killer\",\n    \"httpMethod\": \"GET\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:9001/2015-03-31/functions/-/invocations",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9001",
-							"path": [
-								"2015-03-31",
-								"functions",
-								"-",
-								"invocations"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Single Killer",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"path\": \"/killer\",\n    \"httpMethod\": \"GET\",\n    \"pathParameters\": {\n        \"id\": \"2\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:9001/2015-03-31/functions/-/invocations",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9001",
-							"path": [
-								"2015-03-31",
-								"functions",
-								"-",
-								"invocations"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Survivor Loadout",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"path\": \"/loadout\",\n    \"httpMethod\": \"GET\",\n    \"queryStringParameters\": {\n    \t\"q\": \"survivor\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:9001/2015-03-31/functions/-/invocations",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9001",
-							"path": [
-								"2015-03-31",
-								"functions",
-								"-",
-								"invocations"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Survivors",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"path\": \"/survivor\",\n    \"httpMethod\": \"GET\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:9001/2015-03-31/functions/-/invocations",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9001",
-							"path": [
-								"2015-03-31",
-								"functions",
-								"-",
-								"invocations"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Single Survivor",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"path\": \"/survivor\",\n    \"httpMethod\": \"GET\",\n        \"pathParameters\": {\n        \"id\": \"2\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:9001/2015-03-31/functions/-/invocations",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9001",
-							"path": [
-								"2015-03-31",
-								"functions",
-								"-",
-								"invocations"
-							]
-						}
-					},
-					"response": []
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			},
+			"response": []
 		},
 		{
-			"name": "Dev",
-			"item": [
-				{
-					"name": "Get Killer Loadout",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://dev-api.arhe.io/dbd-randomiser/loadout?q=killer",
-							"protocol": "https",
-							"host": [
-								"dev-api",
-								"arhe",
-								"io"
-							],
-							"path": [
-								"dbd-randomiser",
-								"loadout"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "killer"
-								}
-							]
+			"name": "Get Survivor Loadout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/loadout?q=survivor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"loadout"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "survivor"
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Survivor Loadout",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://dev-api.arhe.io/dbd-randomiser/loadout?q=survivor",
-							"protocol": "https",
-							"host": [
-								"dev-api",
-								"arhe",
-								"io"
-							],
-							"path": [
-								"dbd-randomiser",
-								"loadout"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "survivor"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Single Killer",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://dev-api.arhe.io/dbd-randomiser/killer/1",
-							"protocol": "https",
-							"host": [
-								"dev-api",
-								"arhe",
-								"io"
-							],
-							"path": [
-								"dbd-randomiser",
-								"killer",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Single Survivor",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://dev-api.arhe.io/dbd-randomiser/survivor/1",
-							"protocol": "https",
-							"host": [
-								"dev-api",
-								"arhe",
-								"io"
-							],
-							"path": [
-								"dbd-randomiser",
-								"survivor",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Killers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://dev-api.arhe.io/dbd-randomiser/killer",
-							"protocol": "https",
-							"host": [
-								"dev-api",
-								"arhe",
-								"io"
-							],
-							"path": [
-								"dbd-randomiser",
-								"killer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Survivors",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://dev-api.arhe.io/dbd-randomiser/survivor",
-							"protocol": "https",
-							"host": [
-								"dev-api",
-								"arhe",
-								"io"
-							],
-							"path": [
-								"dbd-randomiser",
-								"survivor"
-							]
-						}
-					},
-					"response": []
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Killers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/killer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"killer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Killer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/killer/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"killer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Survivors",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/survivor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"survivor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Survivor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/survivor/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"survivor",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/item",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/item/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"item",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Killer Perks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/perk/killer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"perk",
+						"killer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Killer Perks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/perk/killer/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"perk",
+						"killer",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Survivor Perks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/perk/survivor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"dbd-randomiser",
+						"perk",
+						"survivor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Survivor Perks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9002/dbd-randomiser/perk/survivor/5",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"dbd-randomiser",
+						"perk",
+						"survivor",
+						"5"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

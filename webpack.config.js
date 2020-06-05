@@ -7,6 +7,8 @@ module.exports = {
     killer: './src/controllers/killer.ts',
     survivor: './src/controllers/survivor.ts',
     loadout: './src/controllers/loadout.ts',
+    item: './src/controllers/item.ts',
+    perk: './src/controllers/perk.ts',
   },
   externals: [
     nodeExternals({

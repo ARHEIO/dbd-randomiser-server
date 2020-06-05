@@ -6,14 +6,14 @@
  * found in the LICENSE file
  */
 
-import { KillerService } from "../services/KillerService";
 import { APIGatewayProxyResult, APIGatewayProxyEvent } from "aws-lambda"
 import config from '../config';
 import { Dynamo } from "../db/Dynamo.db";
 import { dbdRandomiserItem } from "../models/tables.model";
+import { ItemService } from "../services/ItemService";
 import { isArray } from "util";
 
-let dynamo: KillerService;
+let dynamo: ItemService;
 
 const response = {
   statusCode: 200,
@@ -26,21 +26,21 @@ const response = {
 
 export const handler = async(request: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   return new Promise(async resolve => {
-    let killer: dbdRandomiserItem | dbdRandomiserItem[];
+    let item: dbdRandomiserItem | dbdRandomiserItem[];
 
     try {
-      const killerId = request.pathParameters && request.pathParameters.id
-      killer = killerId
-        ? await dynamo.getCharacter(parseInt(killerId), request.queryStringParameters)
-        : await dynamo.getAllCharacters();
+      const itemId = request.pathParameters && request.pathParameters.id
+      item = itemId
+        ? await dynamo.getItem(parseInt(itemId), request.queryStringParameters)
+        : await dynamo.getAllItems();
 
-      response.body = JSON.stringify(killer);
-      console.log("Successfully retrieved", isArray(killer) ? 'all killers' : killer.name);
+      response.body = JSON.stringify(item);
+      console.log("Successfully retrieved", isArray(item) ? 'all items' : item.name);
 
     } catch (error) {
+      console.error(error);
       response.statusCode = 500;
       response.body = error;
-      console.error(error);
     }
 
     resolve(response);
@@ -48,5 +48,5 @@ export const handler = async(request: APIGatewayProxyEvent): Promise<APIGatewayP
 }
 
 (() => {
-  dynamo = new KillerService(config, new Dynamo(config));
+  dynamo = new ItemService(config, new Dynamo(config));
 })()
