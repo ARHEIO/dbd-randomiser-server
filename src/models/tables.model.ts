@@ -4,9 +4,11 @@ interface BasicObject {
   rank: number;
 }
 
-export interface dbdRandomiserKiller extends BasicObject {
+export type dbdRandomiserUpgradable  = BasicObject;
+
+export interface dbdRandomiserItem extends BasicObject {
   id: number;
-  upgradables: BasicObject[];
+  upgradables: dbdRandomiserUpgradable[];
 }
 
 export interface dbdRandomiserPerk extends BasicObject {
@@ -19,5 +21,5 @@ export interface dbdRandomiserSurvivor extends BasicObject {
 
 export interface dbdRandomiserItem extends BasicObject {
   id: number;
-  upgradables: BasicObject[];
+  upgradables: dbdRandomiserUpgradable[];
 }

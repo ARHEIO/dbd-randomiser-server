@@ -15,7 +15,12 @@ export default {
     }
   },
   endpoints: {
-    dynamo: process.env.DYNAMO_ENDPOINT
+    app: process.env.APP_ENDPOINT,
+    dynamo: process.env.DYNAMO_ENDPOINT,
+  },
+  dynamo: {
+    maxRetries: 3,
+    region: 'ap-southeast-2'
   }
 }
 
@@ -34,6 +39,11 @@ export interface IConfig {
     }
   },
   endpoints: {
+    app: string;
     dynamo: string;
+  },
+  dynamo: {
+    maxRetries: number;
+    region: string; 
   }
 }
