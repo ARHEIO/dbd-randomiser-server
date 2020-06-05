@@ -6,7 +6,7 @@
  * found in the LICENSE file
  */
 
- export function shuffleAndSliceArray<T> (arrayOfThings: T[], numberToGet: number): T[] {
+export function shuffleAndSliceArray<T> (arrayOfThings: T[], numberToGet: number): T[] {
   return arrayOfThings && arrayOfThings.length
     ? arrayOfThings
       .map(x => ({ x, r: Math.random() }))
