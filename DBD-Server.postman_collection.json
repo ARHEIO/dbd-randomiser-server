@@ -11,12 +11,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/loadout?q=killer",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/loadout?q=killer",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"loadout"
@@ -37,12 +35,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/loadout?q=survivor",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/loadout?q=survivor",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"loadout"
@@ -63,12 +59,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/killer",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/killer",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"killer"
@@ -83,12 +77,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/killer/1",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/killer/1",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"killer",
@@ -110,12 +102,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/survivor",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/survivor",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"survivor"
@@ -130,12 +120,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/survivor/2",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/survivor/2",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"survivor",
@@ -151,12 +139,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/item",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/item",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"item"
@@ -171,12 +157,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/item/1",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/item/1",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"item",
@@ -192,12 +176,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/perk/killer",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/perk/killer",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"perk",
@@ -213,12 +195,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/perk/killer/5",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/perk/killer/5",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"perk",
@@ -235,12 +215,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/perk/survivor",
-					"protocol": "http",
+					"raw": "{{host}}/dbd-randomiser/perk/survivor",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "9002",
 					"path": [
 						"dbd-randomiser",
 						"perk",
@@ -256,9 +234,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9002/dbd-randomiser/perk/survivor/5",
+					"raw": "{{host}}/dbd-randomiser/perk/survivor/5",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
 					"path": [
 						"dbd-randomiser",
