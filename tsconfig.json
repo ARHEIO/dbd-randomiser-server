@@ -11,7 +11,8 @@
     "allowJs": true,
     "types" : [
       "node",
-      "aws-sdk"
+      "aws-sdk",
+      "jest"
     ],
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",

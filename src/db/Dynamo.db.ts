@@ -9,6 +9,7 @@
 import { AWSError } from 'aws-sdk';
 import { IConfig } from '../config';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { ApplicationError } from '../helpers/errors';
 
 export type GetItemInput = DocumentClient.GetItemInput;
 export type GetItemOutput = DocumentClient.GetItemOutput;
@@ -31,7 +32,7 @@ export class Dynamo {
   private _handleResults<T>(err: AWSError, results: T, resolve: any, reject: any): void {
     if (err) {
       console.error(`message='rejected with error' err='${err}'`)
-      reject(err);
+      reject(new ApplicationError('DYNAMO_ERROR', 'Something went wrong'));
     } else {
       resolve(results);
     }

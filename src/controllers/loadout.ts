@@ -12,10 +12,11 @@ import { APIGatewayProxyResult, APIGatewayProxyEvent } from "aws-lambda";
 import { LoadoutService } from "../services/LoadoutService";
 import { IGeneratedSurvivor, IGeneratedKiller } from '../models/responses.model';
 import { Dynamo } from '../db/Dynamo.db';
+import { ApplicationError, ErrorHandler } from '../helpers/errors';
 
 let loadout: LoadoutService;
 
-const response = {
+let response = {
   statusCode: 200,
   headers: {
     'Access-Control-Allow-Origin': '*',
@@ -27,6 +28,10 @@ const response = {
 export const handler = async(request: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   return new Promise(async resolve => {
     try {
+      if (!request.queryStringParameters || !request.queryStringParameters.q) {
+        throw new ApplicationError('NO_QUERY_PARAM', `Supported values for query param 'q' are: 'survivor', 'killer'`)
+      }
+
       switch(request.queryStringParameters.q) {
         case 'survivor':
           const survivor: IGeneratedSurvivor = await loadout.generateSurvivorLoadout();
@@ -39,13 +44,11 @@ export const handler = async(request: APIGatewayProxyEvent): Promise<APIGatewayP
           break;
 
         default:
-          response.statusCode = 400;
-          response.body = `{msg: "bad query param"}`
+          throw new ApplicationError('BAD_QUERY_PARAM', `Supported query params are: 'q'`)
       }
       console.log(`Successfully retrieved loadout for ${request.queryStringParameters.q}`);
     } catch (error) {
-      response.statusCode = 500;
-      response.body = `{msg: ${error}}`
+      response = {...response, ...ErrorHandler(error)}
     }
     resolve(response);
   })

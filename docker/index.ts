@@ -11,6 +11,11 @@ export const handler = router.handler({
   proxyIntegration: {
     routes: [
       {
+        path: '/ping',
+        method: 'GET',
+        action: () => 'pong'
+      },
+      {
         path: '/killer',
         method: 'GET',
         action: async(request: ProxyIntegrationEvent<any>) => JSON.parse((await killerHandler(request)).body)

@@ -33,7 +33,7 @@ export const handler = async(request: APIGatewayProxyEvent): Promise<APIGatewayP
       item = itemId
         ? await dynamo.getItem(parseInt(itemId), request.queryStringParameters)
         : await dynamo.getAllItems();
-
+      
       response.body = JSON.stringify(item);
       console.log("Successfully retrieved", isArray(item) ? 'all items' : item.name);
 

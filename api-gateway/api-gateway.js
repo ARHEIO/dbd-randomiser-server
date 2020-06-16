@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const axios = require('axios');
 const app = express();
 
+const { appRoutes } = require('./config');
+
 // view engine setup
 app.set('port', process.env.PORT || 9002);
 
@@ -29,11 +31,10 @@ app.get('/ping', async (req, res) => {
   res.status(200).send('pong');
 })
 
-const BASE_PATH = `/dbd-randomiser`;
-const LAMBDA_PATH = 'http://dbd-server:9001/2015-03-31/functions/-/invocations';
+const LAMBDA_PATH = appRoutes.lambdaPath;
 
 // handles all paths with one path param
-app.all(`${BASE_PATH}/*`, (req, res, next) => {
+app.all(`${appRoutes.basePath}/*`, (req, res, next) => {
   console.debug('Adding generic params');
   res.locals.lambdaBody = {
     httpMethod: req.method,
@@ -44,14 +45,30 @@ app.all(`${BASE_PATH}/*`, (req, res, next) => {
 })
 
 // to handle paths with multiple path params
-require('./routes')(app, BASE_PATH);
+appRoutes.routes.forEach(route => {
+  let pathParams = route
+    .split('/')
+    .filter((param) => param[0] === ':')
+    .map(param => param.slice(1));
 
-app.all(`${BASE_PATH}/*`, async(req, res) => {
+  return app.all(`${appRoutes.basePath}${route}`, (req, res, next) => {
+    console.log('Request on ', `${appRoutes.basePath}${route}`)
+    pathParams.forEach((param) => {
+      res.locals.lambdaBody[param] = req.params[param];
+    })
+    next();
+  })
+})
+
+app.all(`${appRoutes.basePath}/*`, async(req, res) => {
   console.log('Request:', JSON.stringify(res.locals.lambdaBody));
   axios.post(LAMBDA_PATH, res.locals.lambdaBody).then(response => {
     res.status = response.data.statusCode;
     res.headers = response.data.headers;
     res.send(response.data.body);
+  }).catch((err) => {
+    res.status = 500;
+    res.send(err.message);
   })
 });
 

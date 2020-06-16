@@ -1,0 +1,5 @@
+version: '3.3'
+services:
+  dbd-db:
+    image: mockserver/mockserver:mockserver-5.10.0
+    command: -logLevel DEBUG -serverPort 8000 -proxyRemotePort 80 -proxyRemoteHost www.mock-server.com
