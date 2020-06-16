@@ -26,7 +26,7 @@ jobs:
         path: ./env-config
 
     - name: Overwrite environment files 📜
-    uses: arheio/env-config-action@v1
+      uses: arheio/env-config-action@v1
       with:
         deploymentStage: 'prod'
         repoName: 'dbd-randomiser-server'
