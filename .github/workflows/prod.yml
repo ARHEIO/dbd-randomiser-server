@@ -14,7 +14,10 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    
+
+    - name: Install Serverless Framework
+      run: npm install -g serverless
+
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -23,7 +26,7 @@ jobs:
         path: ./env-config
 
     - name: Overwrite environment files 📜
-      uses: ./env-config
+    uses: arheio/env-config-action@v1
       with:
         deploymentStage: 'prod'
         repoName: 'dbd-randomiser-server'
