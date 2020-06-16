@@ -1,6 +1,6 @@
 {
   "name": "typescript-lambda-template",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A base package for lambdas that compiles to javascript",
   "main": "index.js",
   "scripts": {
