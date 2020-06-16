@@ -11,19 +11,19 @@ import { dbdRandomiserItem } from '../models/tables.model';
 import { IConfig } from '../config';
 import { DynamoAccessor } from '../db/DynamoAccessor';
 
-export class KillerService {
+export class ItemService {
   config: IConfig;
-  killerDb: DynamoAccessor;
+  itemDb: DynamoAccessor;
   allowedExpands = new Set<string>();
 
   constructor(config: IConfig, dynamo: Dynamo) {
     this.config = config;
-    this.killerDb = new DynamoAccessor(dynamo, config.killer.tableNames.killers);
+    this.itemDb = new DynamoAccessor(dynamo, config.survivor.tableNames.items);
     this.allowedExpands.add('upgradables'); // TODO add this to config
   }
 
-  public async getCharacter(index: number, options: {[key: string]: string}): Promise<dbdRandomiserItem> {
-    let killer: dbdRandomiserItem;
+  public async getItem(index: number, options: {[key: string]: string}): Promise<dbdRandomiserItem> {
+    let item: dbdRandomiserItem;
     if (options.expands) {
       const expands = options.expands.split(',') || [options.expands];
       expands.forEach(expand => {
@@ -31,17 +31,17 @@ export class KillerService {
           throw new Error('Unsupported expand, supported expands are: upgradables');
         }
       })
-      killer = await this.killerDb.getDocument(index, ['upgradables']);
+      item = await this.itemDb.getDocument(index, ['upgradables']);
     } else {
-      killer = await this.killerDb.getDocument(index);
-      killer.upgradables = {
-        href: `${this.config.endpoints.app}/killer/${index}?expands=upgradable`
+      item = await this.itemDb.getDocument(index);
+      item.upgradables = {
+        href: `${this.config.endpoints.app}/Item/${index}?expands=upgradable`
       } as any
     }
-    return killer;
+    return item;
   }
 
-  public async getAllCharacters(): Promise<dbdRandomiserItem[]> {
-    return this.killerDb.getAllDocuments();
+  public async getAllItems(): Promise<dbdRandomiserItem[]> {
+    return this.itemDb.getAllDocuments();
   }
 }

@@ -1,7 +1,3 @@
-import { DynamoService } from './DynamoService';
-import * as utils from '../helpers/utils';
-import { dbdRandomiserSurvivor, dbdRandomiserItem, dbdRandomiserPerk } from '../models/tables.model';
-
 /**
  * @license
  * Copyright Adam Eggleston. All Rights Reserved.
@@ -10,38 +6,23 @@ import { dbdRandomiserSurvivor, dbdRandomiserItem, dbdRandomiserPerk } from '../
  * found in the LICENSE file
  */
 
- 
-export class SurvivorService extends DynamoService {
-  constructor(config: any) {
-    super(config);
+import { Dynamo } from '../db/Dynamo.db';
+import { dbdRandomiserSurvivor } from '../models/tables.model';
+import { IConfig } from '../config';
+import { DynamoAccessor } from '../db/DynamoAccessor';
 
-    this.tableNames = config.survivor.tableNames;
-  }
+export class SurvivorService {
+  survDb: DynamoAccessor;
 
-  public async getRandomSurvivor(): Promise<dbdRandomiserSurvivor> {
-    const survIndex = utils.getRandomIndex((await this.getSurvivorSize()), 1)[0];
-    return this.getItem(survIndex, this.tableNames.survivors);
-  }
-
-  public async getRandomItem(): Promise<dbdRandomiserItem> {
-    const itemIndex = utils.getRandomIndex((await this.getItemSize()), 1)[0];
-    return this.getItem(itemIndex, this.tableNames.items);
+  constructor(config: IConfig, dynamo: Dynamo) {
+    this.survDb = new DynamoAccessor(dynamo, config.survivor.tableNames.survivors);
   }
 
-  public async getRandomPerks(): Promise<dbdRandomiserPerk[]> {
-    const perkIds = utils.getRandomIndex((await this.getPerkSize()), 4);
-    return Promise.all(perkIds.map(id => this.getItem(id, this.tableNames.perks)))
+  public async getCharacter(index: number): Promise<dbdRandomiserSurvivor> {
+    return this.survDb.getDocument(index);
   }
 
-  private async getSurvivorSize(): Promise<number> {
-    return this.getTableSize(this.tableNames.survivors)
-  }
-  
-  private getPerkSize(): Promise<number> {
-    return this.getTableSize(this.tableNames.perks)
-  }
-  
-  private getItemSize(): Promise<number> {
-    return this.getTableSize(this.tableNames.items)
+  public async getAllCharacters(): Promise<dbdRandomiserSurvivor[]> {
+    return this.survDb.getAllDocuments();
   }
 }

@@ -15,6 +15,35 @@ export default {
     }
   },
   endpoints: {
-    dynamo: process.env.DYNAMO_ENDPOINT
+    app: process.env.APP_ENDPOINT,
+    dynamo: process.env.DYNAMO_ENDPOINT,
+  },
+  dynamo: {
+    maxRetries: 3,
+    region: 'ap-southeast-2'
+  }
+}
+
+export interface IConfig {
+  survivor: {
+    tableNames: {
+      survivors: string;
+      perks: string;
+      items: string;
+    }
+  },
+  killer: {
+    tableNames: {
+      killers: string;
+      perks: string;
+    }
+  },
+  endpoints: {
+    app: string;
+    dynamo: string;
+  },
+  dynamo: {
+    maxRetries: number;
+    region: string; 
   }
 }

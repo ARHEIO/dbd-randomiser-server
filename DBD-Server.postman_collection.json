@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "c08de198-f37d-4d06-bbd5-92dd0c355a3b",
+		"name": "DBD-Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Killer Loadout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/loadout?q=killer",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"loadout"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "killer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Survivor Loadout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/loadout?q=survivor",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"loadout"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "survivor"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Killers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/killer",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"killer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Killer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/killer/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"killer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Survivors",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/survivor",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"survivor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Survivor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/survivor/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"survivor",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/item",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/item/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"item",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Killer Perks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/perk/killer",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"perk",
+						"killer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Killer Perks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/perk/killer/5",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"perk",
+						"killer",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Survivor Perks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/perk/survivor",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"perk",
+						"survivor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Survivor Perks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/dbd-randomiser/perk/survivor/5",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"dbd-randomiser",
+						"perk",
+						"survivor",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

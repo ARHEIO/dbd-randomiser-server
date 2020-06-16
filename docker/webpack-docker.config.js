@@ -1,14 +1,11 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
-    killer: './src/controllers/killer.ts',
-    survivor: './src/controllers/survivor.ts',
-    loadout: './src/controllers/loadout.ts',
-    item: './src/controllers/item.ts',
-    perk: './src/controllers/perk.ts',
+    handler: './docker/index.ts',
   },
   externals: [
     nodeExternals({
@@ -35,8 +32,8 @@ module.exports = {
     concatenateModules: true
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: 'index.js',
+    path: path.resolve(__dirname, '../dist'),
     libraryTarget: 'commonjs',
   },
   target: 'node'

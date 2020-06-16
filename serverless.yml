@@ -33,8 +33,9 @@ functions:
         - dist/killer.js
     events:
       - http:
-          path: killer
+          path: killer/{id}
           method: any
+          cors: true
   survivor:
     handler: dist/survivor.handler
     environment:
@@ -44,8 +45,45 @@ functions:
         - dist/survivor.js
     events:
       - http:
-          path: survivor
+          path: survivor/{id}
           method: any
+          cors: true
+  loadout:
+    handler: dist/loadout.handler
+    environment:
+      NODE_ENV: production
+    package:
+      include:
+        - dist/loadout.js
+    events:
+      - http:
+          path: loadout
+          method: any
+          cors: true
+  item:
+    handler: dist/item.handler
+    environment:
+      NODE_ENV: production
+    package:
+      include:
+        - dist/item.js
+    events:
+      - http:
+          path: item
+          method: any
+          cors: true
+  perk:
+    handler: dist/perk.handler
+    environment:
+      NODE_ENV: production
+    package:
+      include:
+        - dist/perk.js
+    events:
+      - http:
+          path: perk
+          method: any
+          cors: true
 
 
 plugins:

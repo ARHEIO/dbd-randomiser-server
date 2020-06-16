@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  dbd-db:
+    image: amazon/dynamodb-local:latest
+    ports:
+      - "8000:8000"
+    command: ["-jar", "DynamoDBLocal.jar", "-sharedDb", "-dbPath", "/home/dynamodblocal/data"]
+    volumes:
+      - ./volumes/dynamodb:/home/dynamodblocal/data
+
+  dbd-server:
+    image: lambci/lambda:nodejs12.x
+    command: ./dist/index.handler
+    env_file: .env
+    environment:
+      DOCKER_LAMBDA_STAY_OPEN: 1
+    ports:
+      - "9001:9001"
+    volumes:
+      - '$PWD:/var/task:ro,delegated'
+
+  dbd-gateway:
+    build: ./api-gateway
+    ports:
+      - "9002:9002"
+

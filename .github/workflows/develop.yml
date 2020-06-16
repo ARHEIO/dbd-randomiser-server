@@ -1,9 +1,9 @@
-name: Production release
+name: Deploy Dev
 
 on:
   push:
     branches:
-      - master
+      - develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,7 +14,10 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    
+
+    - name: Install Serverless Framework
+      run: npm install -g serverless
+
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -22,8 +25,8 @@ jobs:
         token: ${{ secrets.checkoutToken }}
         path: ./env-config
 
-    - name: Overwrite environment files 📜
-      uses: ./env-config
+    - name: Overwrite environment files
+      uses: arheio/env-config-action@v1
       with:
         deploymentStage: 'prod'
         repoName: 'dbd-randomiser-server'
@@ -35,7 +38,7 @@ jobs:
         npm run test
         npm run build
 
-    - name: Serverless AWS authentication 🗝
+    - name: Serverless AWS authentication
       run: |
         sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        sls deploy -s prod
+        sls deploy -s dev
