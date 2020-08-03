@@ -46,7 +46,7 @@ export const handler = async(request: APIGatewayProxyEvent): Promise<APIGatewayP
         default:
           throw new ApplicationError('BAD_QUERY_PARAM', `Supported query params are: 'q'`)
       }
-      console.log(`Successfully retrieved loadout for ${request.queryStringParameters.q}`);
+      console.log(`Successfully retrieved loadout for ${request.queryStringParameters.q}, response: ${response}`);
     } catch (error) {
       response = {...response, ...ErrorHandler(error)}
     }
