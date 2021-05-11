@@ -54,6 +54,6 @@
   "dependencies": {
     "@types/jest": "^25.2.3",
     "dynamoose": "^2.2.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.21"
   }
 }
